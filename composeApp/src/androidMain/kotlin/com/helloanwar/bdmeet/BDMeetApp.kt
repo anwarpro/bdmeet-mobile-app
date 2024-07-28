@@ -1,0 +1,13 @@
+package com.helloanwar.bdmeet
+
+import android.app.Application
+import io.livekit.android.LiveKit
+import io.livekit.android.util.LoggingLevel
+
+class BDMeetApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        LiveKit.loggingLevel = LoggingLevel.VERBOSE
+        // LiveKit.enableWebRTCLogging = true
+    }
+}

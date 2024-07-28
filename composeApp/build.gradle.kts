@@ -16,9 +16,9 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -29,13 +29,23 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.livekit.android)
+            implementation(libs.livekit.android.camerax)
+            implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+            implementation(libs.audioswitch)
+            implementation(libs.timber)
+            implementation(libs.androidx.lifecycle.process)
+            implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            implementation(libs.androidx.lifecycle.runtime.ktx)
+            implementation("androidx.compose.runtime:runtime-livedata")
+            implementation(libs.androidx.preference.ktx)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
