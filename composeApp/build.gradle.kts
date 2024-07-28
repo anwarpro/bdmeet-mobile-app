@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    kotlin("plugin.serialization") version "2.0.0"
+    id("kotlin-parcelize")
 }
 
 kotlin {
@@ -54,6 +56,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

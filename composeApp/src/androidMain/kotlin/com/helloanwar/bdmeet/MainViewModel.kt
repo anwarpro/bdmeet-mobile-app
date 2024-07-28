@@ -48,7 +48,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         private const val PREFERENCES_KEY_E2EE_KEY = "e2ee_key"
 
         const val URL = "wss://livekit.helloanwar.com"
-        const val TOKEN = ""
+        const val TOKEN =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjIyMzc2NTEsImlzcyI6IkFQSW40M3ZHVlU5UmRBNCIsIm5hbWUiOiJ1c2VyMSIsIm5iZiI6MTcyMjE1MTI1MSwic3ViIjoidXNlcjEiLCJ2aWRlbyI6eyJyb29tIjoibXktZmlyc3Qtcm9vbSIsInJvb21Kb2luIjp0cnVlfX0.0SCQ1DG2l6QS2cSP6lnIzYii9fpxkKJe_V4-6YFejgo"
         const val E2EE_KEY = "12345678"
     }
 }

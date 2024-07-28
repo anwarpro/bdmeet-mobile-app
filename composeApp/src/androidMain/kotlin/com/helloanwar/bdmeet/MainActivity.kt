@@ -72,10 +72,16 @@ class MainActivity : ComponentActivity() {
                 defaultE2eeOn = viewModel.getE2EEOptionsOn(),
                 onConnect = { url, token, e2eeKey, e2eeOn, stressTest ->
                     val intent = Intent(this@MainActivity, CallActivity::class.java).apply {
-                        putExtra("bdmeet_url", url)
-                        putExtra("bdmeet_token", token)
-                        putExtra("bdmeet_e2eeKey", e2eeKey)
-                        putExtra("bdmeet_e2eeOn", e2eeOn)
+                        putExtra(
+                            CallActivity.KEY_ARGS,
+                            CallActivity.BundleArgs(
+                                url,
+                                token,
+                                e2eeKey,
+                                e2eeOn,
+                                stressTest,
+                            ),
+                        )
                     }
                     startActivity(intent)
                 },

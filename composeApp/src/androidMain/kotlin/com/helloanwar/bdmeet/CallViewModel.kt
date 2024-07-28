@@ -8,8 +8,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.CreationExtras.Key
 import com.github.ajalt.timberkt.Timber
+import com.helloanwar.bdmeet.CallActivity.BundleArgs
 import com.helloanwar.bdmeet.model.StressTest
 import com.helloanwar.bdmeet.service.ForegroundService
 import io.livekit.android.AudioOptions
@@ -435,6 +442,31 @@ class CallViewModel(
             LKLog.e(e) { "Unable to dump reference tables, you can try `adb shell settings put global hidden_api_policy 1`" }
         }
     }
+
+    // Define ViewModel factory in a companion object
+    companion object {
+        val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            @Suppress("UNCHECKED_CAST")
+            override fun <T : ViewModel> create(
+                modelClass: Class<T>,
+                extras: CreationExtras
+            ): T {
+                // Get the Application object from extras
+                val application = checkNotNull(extras[APPLICATION_KEY])
+                // Create a SavedStateHandle for this ViewModel from extras
+                val savedStateHandle = extras.createSavedStateHandle()
+
+                return CallViewModel(
+                    url = MainViewModel.URL,
+                    token = MainViewModel.TOKEN,
+                    e2ee = false,
+                    e2eeKey = "123456",
+                    application = application,
+                ) as T
+            }
+        }
+    }
+
 }
 
 private fun <T> LiveData<T>.hide(): LiveData<T> = this

@@ -3,6 +3,7 @@ package com.helloanwar.bdmeet
 import android.app.Activity
 import android.media.projection.MediaProjectionManager
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -59,11 +60,12 @@ import io.livekit.android.room.Room
 import io.livekit.android.room.participant.Participant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 class CallActivity : ComponentActivity() {
 
-    private val viewModel: CallViewModel by viewModels()
+    private val viewModel: CallViewModel by viewModels { CallViewModel.Factory }
 
     private val screenCaptureIntentLauncher =
         registerForActivityResult(
@@ -474,11 +476,12 @@ class CallActivity : ComponentActivity() {
         const val KEY_ARGS = "args"
     }
 
+    @Parcelize
     data class BundleArgs(
         val url: String,
         val token: String,
         val e2eeKey: String,
         val e2eeOn: Boolean,
         val stressTest: StressTest,
-    )
+    ) : Parcelable
 }
